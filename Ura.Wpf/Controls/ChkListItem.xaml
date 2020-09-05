@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Ura.Controls.ChkListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             x:Name="listItem"
+             Background="Transparent"
+             mc:Ignorable="d"
+             d:DesignHeight="30" d:DesignWidth="300">
+    <!--EntityBaseVN-->
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     Duration="00:00:.1"
+                                                     From="0"
+                                                     To="1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <CheckBox x:Name="chkbox"
+                  IsChecked="{Binding IsChecked}" VerticalContentAlignment="Top" VerticalAlignment="Stretch"
+                  Focusable="False"
+                  Content="{Binding}">
+            <CheckBox.Style>
+                <Style TargetType="CheckBox">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked}" Value="False" />
+                                <Condition Binding="{Binding HighlightUnchecked, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="LightPink" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </CheckBox.Style>
+        </CheckBox>
+    </Grid>
+</UserControl>

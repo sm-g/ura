@@ -1,0 +1,72 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ura.Window4"
+        xmlns:ura="clr-namespace:ura"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <UserControl.Resources>
+        <ura:ObjectCollection x:Key="Men">
+            <sys:String>5 Иванов Иван</sys:String>
+            <sys:String>17 Сидоров</sys:String>
+        </ura:ObjectCollection>
+
+        <ura:AbilIsCheckedConverter x:Key="CheckedConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="28" />
+        </Grid.RowDefinitions>
+        <Label Content="Люди" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10,5,0,0" ><Hyperlink>Пользователи</Hyperlink></TextBlock>
+
+        <DataGrid Grid.Row="1" x:Name="users" SelectionMode="Extended" AutoGenerateColumns="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Name}" Value="user 4">
+                            <Setter Property="Background" Value="LightYellow" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="#" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="F" />
+                <DataGridTextColumn Binding="{Binding I}" Header="I" />
+                <DataGridTextColumn Binding="{Binding O}" Header="O" />
+                <DataGridCheckBoxColumn Binding="{Binding Depricated}" Header="Depr" />
+            </DataGrid.Columns>
+
+            <ura:Man Id="5" Description="director" Name="Иванов" I="Иван" />
+            <ura:Man Id="17" Description="producer" Name="Сидоров"  />
+            <ura:Man />
+        </DataGrid>
+
+        <ListBox x:Name="user" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" SelectedIndex="0">
+            <ListBoxItem>
+                iiv, director (Иванов Иван)
+            </ListBoxItem>
+            <ListBoxItem>
+               user2
+            </ListBoxItem>
+            <ListBoxItem>
+                dave, producer (Сидоров)
+            </ListBoxItem>
+            <ListBoxItem>
+               user4
+            </ListBoxItem>
+            <ListBoxItem>
+               user5
+            </ListBoxItem>
+        </ListBox>
+
+    </Grid>
+</UserControl>

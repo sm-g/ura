@@ -1,0 +1,222 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ura.Window1"
+        xmlns:ura="clr-namespace:ura"
+        xmlns:m="clr-namespace:ura.Models"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <UserControl.Resources>
+        <ura:ObjectCollection x:Key="Men">
+            <sys:String>5 Иванов Иван</sys:String>
+            <sys:String>17 Сидоров</sys:String>
+        </ura:ObjectCollection>
+
+        <ura:AbilIsCheckedConverter x:Key="CheckedConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="28" />
+        </Grid.RowDefinitions>
+        <Label Content="Пользователи" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10,5,0,0" ><Hyperlink>Роли</Hyperlink></TextBlock>
+        <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="2" Margin="10,5,0,0" ><Hyperlink>Возможности</Hyperlink></TextBlock>
+
+        <DataGrid Grid.Row="1" x:Name="users" SelectionMode="Extended" AutoGenerateColumns="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Name}" Value="user 4">
+                            <Setter Property="Background" Value="LightYellow" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="#" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="Login" />
+                <DataGridTemplateColumn Header="Password" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <PasswordBox Password="11111" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Desc" />
+                <DataGridCheckBoxColumn Binding="{Binding Depricated}" Header="Depr" />
+                <DataGridComboBoxColumn ItemsSource="{StaticResource Men}" SelectedItemBinding="{Binding Man}" Header="Man" />
+            </DataGrid.Columns>
+
+            <m:User Id="1" Description="director" Name="iiv" Man="5 Иванов Иван" />
+            <m:User Id="2" Description="" Name="user 2" Depricated="True" />
+            <m:User Id="3" Description="producer" Name="dave"  Man="17 Сидоров" />
+            <m:User Id="4" Description="" Name="user 4" />
+            <m:User Id="5" Description="" Name="user 5" />
+            <m:User />
+        </DataGrid>
+        <DockPanel Grid.Row="2" HorizontalAlignment="Right" >
+            <DockPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="23"/>
+                    <Setter Property="Margin" Value="10,0,0,0"/>
+                </Style>
+            </DockPanel.Resources>
+            <Button Content="Удалить пользователя" VerticalAlignment="Bottom"  />
+        </DockPanel>
+        
+
+        <DataGrid  Grid.Row="1" Grid.Column="1" GridLinesVisibility="None" Margin="10,0,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="#" />
+                <DataGridCheckBoxColumn Binding="{Binding IsChecked}" />
+                <DataGridTextColumn Binding="{Binding Description}" />
+            </DataGrid.Columns>
+
+            <m:Role Id="1" Description="root" IsChecked="True" />
+            <m:Role Id="2" Description="admin" IsChecked="True" />
+            <m:Role Id="3" Description="user" IsChecked="False" />
+            <m:Role Id="4" Description="manager" Depricated="True"  IsChecked="False" />
+            <m:Role Id="5" Description="worker"  IsChecked="False" />
+        </DataGrid>
+        <!--<ListBox x:Name="roles" HorizontalAlignment="Left" Width="100" Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" Padding="0,15,0,0">
+            <ListBoxItem>
+                <CheckBox IsChecked="True">root</CheckBox>
+            </ListBoxItem>
+            <ListBoxItem>
+                <CheckBox IsChecked="True">admin</CheckBox>
+            </ListBoxItem>
+            <ListBoxItem>
+                <CheckBox IsChecked="{x:Null}">user</CheckBox>
+            </ListBoxItem>
+            <ListBoxItem>
+                <CheckBox IsChecked="False">manager</CheckBox>
+            </ListBoxItem>
+            <ListBoxItem>
+                <CheckBox IsChecked="False">worker</CheckBox>
+            </ListBoxItem>
+        </ListBox>-->
+
+        <DataGrid GridLinesVisibility="None" Grid.Column="2" Margin="10,0,0,0" Grid.Row="1">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Reason}" Value="True">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Reason}" Value="False">
+                            <Setter Property="Background" Value="LightPink" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="#" />
+                <DataGridCheckBoxColumn Binding="{Binding IsChecked}" IsThreeState="True" />
+                <DataGridTextColumn Binding="{Binding Description}" />
+                <DataGridTemplateColumn Header="Наследуется">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding Inh}" IsChecked="{Binding Reason, Converter={StaticResource CheckedConverter}, ConverterParameter=0}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="+">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <RadioButton IsChecked="{Binding Reason, Converter={StaticResource CheckedConverter}, ConverterParameter=1}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="−">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <RadioButton IsChecked="{Binding Reason, Converter={StaticResource CheckedConverter}, ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <m:Ability Id="1" IsChecked="True" Description="save" Inh="root, (1)" Reason="{x:Null}" />
+            <m:Ability Id="2" IsChecked="True" Description="delete" Inh="root, (1)"  Reason="True" />
+            <m:Ability Id="3" IsChecked="False" Description="update" Inh="—"  Reason="{x:Null}" />
+            <m:Ability Id="4" IsChecked="True" Description="select" Inh="root" Reason="True" />
+            <m:Ability Id="5" IsChecked="False" Description="create" Inh="—"  Reason="False" />
+        </DataGrid>
+
+        <!--<Border Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" BorderThickness="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" />
+            </Border.BorderBrush>
+            <Grid x:Name="abils2" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16" />
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="19" />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border
+                                      Name="Border"
+                                      Padding="2">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Margin" Value="5,0,0,0" />
+                    </Style>
+                </Grid.Resources>
+
+                <TextBlock Grid.Column="1">Наследуется от</TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center">+</TextBlock>
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center">−</TextBlock>
+
+                <CheckBox IsChecked="True" Grid.Row="1">save</CheckBox>
+                <RadioButton Grid.Column="1" IsChecked="True" Grid.Row="1">root, admin</RadioButton>
+                <RadioButton Grid.Column="2" Grid.Row="1" ></RadioButton>
+                <RadioButton Grid.Column="3" Grid.Row="1" ></RadioButton>
+
+                <CheckBox Grid.Row="2" IsChecked="True">delete</CheckBox>
+                <RadioButton Grid.Row="2" Grid.Column="1" IsChecked="True" Content="root" />
+                <RadioButton Grid.Row="2" Grid.Column="2" ></RadioButton>
+                <RadioButton Grid.Row="2" Grid.Column="3" ></RadioButton>
+
+                <CheckBox Grid.Row="3" IsChecked="{x:Null}">update</CheckBox>
+                <RadioButton Grid.Row="3" Grid.Column="1" IsChecked="True" Content="—" />
+                <RadioButton Grid.Row="3" Grid.Column="2" ></RadioButton>
+                <RadioButton Grid.Row="3" Grid.Column="3" ></RadioButton>
+
+                <CheckBox Grid.Row="4" IsChecked="False">select</CheckBox>
+                <RadioButton Grid.Row="4" Grid.Column="1" IsChecked="True" Content="—" />
+                <RadioButton Grid.Row="4" Grid.Column="2" ></RadioButton>
+                <RadioButton Grid.Row="4" Grid.Column="3" ></RadioButton>
+
+                <CheckBox Grid.Row="5" IsChecked="False">create</CheckBox>
+                <RadioButton Grid.Row="5" Grid.Column="1"  Content="—" />
+                <RadioButton Grid.Row="5" Grid.Column="2" ></RadioButton>
+                <RadioButton Grid.Row="5" Grid.Column="3" ></RadioButton>
+            </Grid>
+        </Border>-->
+    </Grid>
+</UserControl>

@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Ura.Controls.Filter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Ura.ViewModels"
+             mc:Ignorable="d" 
+             x:Name="filter"
+             Height="23" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <DataTemplate x:Key="EntityTemplate" DataType="{x:Type vm:EntityBaseVM}">
+            <TextBlock Text="{Binding Represent}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox ItemsSource="{Binding Objects, ElementName=filter}" 
+                  SelectedItem="{Binding SelectedObject, ElementName=filter, Mode=TwoWay}" 
+                  ItemTemplate="{StaticResource EntityTemplate}"
+                  TextSearch.TextPath="Represent"
+                  IsEditable="True">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Deprecated}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DeprecatedBrush}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+    </Grid>
+</UserControl>

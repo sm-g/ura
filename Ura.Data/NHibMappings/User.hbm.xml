@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ura.Models"
+namespace="Ura.Models">
+  <class name="User" table="User_" xmlns="urn:nhibernate-mapping-2.2">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="Login" />
+    <property name="Password" column="Pass" />
+    <property name="Deprecated" />
+    <set name="Roles" table="UsersRoles" access="field.camelcase-underscore">
+      <key column="UserID" />
+      <many-to-many column="RoleID" class="Role" />
+    </set>
+    <map name="OverAbilities" table="UsersAbilities" access="field.camelcase-underscore">
+      <key column="UserID" />
+      <map-key-many-to-many class="Ability" column="AbilityID" />
+      <element column="ToAdd" type="System.Boolean" />
+    </map>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Ura.ViewModels.ListViewModel" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIgACkAAAAAAAAAAEAAAAAEAABAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Controls\ListViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Ura.ViewModels.EditorViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAIABAAAAAAKAEABAAAAEAAIAAAAAAAEA=</HashCode>
+      <FileName>ViewModels\Controls\EditorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.UserVM" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACiAAAAAAAAAAAEAAAAAAAAEBAAAAAAAAAQAAAAAQA=</HashCode>
+      <FileName>ViewModels\Entities\UserVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ura.ViewModels.AbilityVM" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACiAAAAAAAgAAAEAAIAAAAAEBAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Entities\AbilityVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ura.ViewModels.EntityBaseVM" Collapsed="true">
+    <Position X="9.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgAAAAACAAEBAAAAAAAACAEAAABAAAAAQAAAAAoAA=</HashCode>
+      <FileName>ViewModels\Entities\EntityBaseVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ura.ViewModels.RoleVM" Collapsed="true">
+    <Position X="12" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACiAAAAAAAgAAAEAAAAABAAEBAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Entities\RoleVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.AbstractUraScreenViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="1.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Buttons" Type="Ura.ViewModels.AddButtonsViewModel&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.75" Y="3.562" />
+        <Point X="3.125" Y="3.562" />
+        <Point X="3.125" Y="4.346" />
+        <Point X="3.75" Y="4.346" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="List1" Type="Ura.ViewModels.ListViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.25" Y="3.691" />
+        <Point X="2.25" Y="5.665" />
+        <Point X="5.75" Y="5.665" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAIBgAIEAQgQAAAAAAAAAIQAAAGAAAIBAAAA=</HashCode>
+      <FileName>ViewModels\Screens\AbstractUraScreenViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="controller" />
+      <Property Name="Editor" />
+      <Property Name="Buttons" />
+      <Property Name="List1" />
+      <Property Name="List2" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Ura.ViewModels.AddButtonsViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EBAQAAAAABAAIAAAAAAAAIACAAwAAAAAAAAAkAAAAEA=</HashCode>
+      <FileName>ViewModels\Controls\AddButtonsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.UserScreenViewModel" Collapsed="true">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAACAAAAAAAAAAAAAQAAAAAgIgAEAABAAAAQAAAAAA=</HashCode>
+      <FileName>ViewModels\Screens\UserScreenViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.RoleScreenViewModel" Collapsed="true">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQAAAIAAAAQAAAAAAQgBAAABBAAAQAAAAAA=</HashCode>
+      <FileName>ViewModels\Screens\RoleScreenViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.AbilityScreenViewModel" Collapsed="true">
+    <Position X="4.75" Y="6.75" Width="1.5" />
+    <InheritanceLine Type="Ura.ViewModels.Screens.AbstractUraScreenViewModel&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2" Y="3.691" />
+        <Point X="2" Y="6.375" />
+        <Point X="5.5" Y="6.375" />
+        <Point X="5.5" Y="6.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>kAAAAAAAAQAAAAAAAAQAAAAAAYABEAABAAAAAAAAAAQ=</HashCode>
+      <FileName>ViewModels\Screens\AbilityScreenViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.SelectorViewModel" Collapsed="true">
+    <Position X="9.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgACAAAAAAAEAABAAAAAQgAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Screens\SelectorViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="SelectedItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.DialogViewModel" Collapsed="true">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAAACAAAIAAAECEAAAAEAAQAAAAAQAIAAAAAAAACAA=</HashCode>
+      <FileName>ViewModels\Screens\DialogViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ura.Controller">
+    <Position X="14.75" Y="0.5" Width="5.25" />
+    <Members>
+      <Field Name="_abilities" Hidden="true" />
+      <Field Name="_roles" Hidden="true" />
+      <Field Name="_users" Hidden="true" />
+      <Method Name="CheckExtraAbilities" Hidden="true" />
+      <Method Name="CheckOnRoleDeprChanged" Hidden="true" />
+      <Method Name="ChecksOnAbilityDeprChanged" Hidden="true" />
+      <Method Name="CheckSubtractedAbilities" Hidden="true" />
+      <Field Name="dataGetter" Hidden="true" />
+      <Method Name="GetBonusRole" Hidden="true" />
+      <Method Name="GetExtraAbilities" Hidden="true" />
+      <Method Name="GetRolesAbilities" Hidden="true" />
+      <Method Name="GetSubtractedAbilities" Hidden="true" />
+      <Method Name="MakeBonusRole" Hidden="true" />
+      <Field Name="makingBonus" Hidden="true" />
+      <Method Name="OnAbilitiesChanged" Hidden="true" />
+      <Method Name="OnDeprChanged" Hidden="true" />
+      <Method Name="OnModelChanged" Hidden="true" />
+      <Method Name="OnRolesChanged" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AygAAaAIAQAAAEoAgQGSAIIgMkEQBIIIGgRRRIBBAVA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ura.ViewModels.Screens.ShellWindowViewModel" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IhAAAAAAAAAAAAQAAEAAAABAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Screens\ShellWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

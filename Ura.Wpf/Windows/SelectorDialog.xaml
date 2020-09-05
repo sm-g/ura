@@ -1,0 +1,43 @@
+﻿<Window x:Class="Ura.Windows.SelectorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Ura.Controls"
+        xmlns:windows="clr-namespace:Ura.Windows"        
+        windows:DialogCloser.DialogResult="{Binding DialogResult}"
+        Title="{Binding Title}" Height="300" Width="300" WindowStyle="ToolWindow"
+        ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+    <DockPanel Margin="5">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  DockPanel.Dock="Bottom">
+            <StackPanel.Resources>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource commandButton}" />
+            </StackPanel.Resources>
+            
+            <Button Content="Добавить" IsDefault="True" Command="{Binding OkCommand}"/>
+            <Button Content="Отмена" IsCancel="True" Command="{Binding CancelCommand}"  />
+        </StackPanel>
+
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,0,0,10">
+        <Button DockPanel.Dock="Right"
+                Command="{Binding FilterCommand}"
+                Style="{StaticResource squareButton}">f</Button>
+        <TextBox x:Name="input"
+                 Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        </DockPanel>
+
+        <ListView ItemsSource="{Binding Items}" SelectionMode="Extended">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
+</Window>

@@ -1,0 +1,18 @@
+﻿<ListBoxItem x:Class="Ura.Controls.DescrListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <CheckBox IsChecked="{Binding IsChecked,RelativeSource={RelativeSource AncestorType=ListBoxItem}}" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Text,RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+            <TextBlock Grid.Column="1" FontSize="10" Text="{Binding Description,RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+        </Grid>
+    </CheckBox>
+</ListBoxItem>

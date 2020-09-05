@@ -1,0 +1,727 @@
+<Project>
+  <Name>URA</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Ura.Models.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Ability</Name>
+        <Access>Public</Access>
+        <Location left="637" top="45" />
+        <Size width="204" height="234" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public virtual Int32 Id { get; set; }</Member>
+        <Member type="Property">public virtual String Description { get; set; }</Member>
+        <Member type="Property">public virtual Boolean Deprecated { get; set; }</Member>
+        <Member type="Constructor">public Ability()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Role</Name>
+        <Access>Public</Access>
+        <Location left="66" top="45" />
+        <Size width="209" height="234" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ISet&lt;Ability&gt; _abilities</Member>
+        <Member type="Property">public virtual Int32 Id { get; set; }</Member>
+        <Member type="Property">public virtual String Description { get; set; }</Member>
+        <Member type="Property">public virtual Boolean Deprecated { get; set; }</Member>
+        <Member type="Property">public virtual ISet&lt;Ability&gt; Abilities { get; }</Member>
+        <Member type="Constructor">public Role()</Member>
+        <Member type="Constructor">public Role(IEnumerable&lt;Ability&gt; ablilties)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>BonusRole</Name>
+        <Access>Public</Access>
+        <Location left="66" top="339" />
+        <Size width="209" height="118" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public override Boolean Deprecated { get; }</Member>
+        <Member type="Constructor">public BonusRole(IEnumerable&lt;Ability&gt; ablilties)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="332" top="96" />
+        <Size width="251" height="234" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ISet&lt;Role&gt; _roles</Member>
+        <Member type="Field">private IDictionary&lt;Ability, Boolean&gt; _overAbilities</Member>
+        <Member type="Property">public virtual Int32 Id { get; set; }</Member>
+        <Member type="Property">public virtual String Login { get; set; }</Member>
+        <Member type="Property">public virtual String Password { get; set; }</Member>
+        <Member type="Property">public virtual Boolean Deprecated { get; set; }</Member>
+        <Member type="Property">public virtual ISet&lt;Role&gt; Roles { get; }</Member>
+        <Member type="Property">public virtual IDictionary&lt;Ability, Boolean&gt; OverAbilities { get; }</Member>
+        <Member type="Constructor">public User()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="2" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>159</X>
+          <Y>314</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>159</X>
+          <Y>304</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="3" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="1" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>304</X>
+          <Y>75</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="3" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>612</X>
+          <Y>219</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>ura.exe</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Controller</Name>
+        <Access>Public</Access>
+        <Location left="1037" top="624" />
+        <Size width="162" height="1165" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private readonly IDataGetter dataGetter</Member>
+        <Member type="Field">private static Dictionary&lt;User, Boolean&gt; makingBonus</Member>
+        <Member type="Event">public event UserEventHandler UserRolesChanged</Member>
+        <Member type="Event">public event UserEventHandler UserDeprecatedChanged</Member>
+        <Member type="Event">public event RoleEventHandler RoleAbilitiesChanged</Member>
+        <Member type="Event">public event RoleEventHandler RoleDeprecatedChanged</Member>
+        <Member type="Event">public event UserEventHandler UserAbilitiesChanged</Member>
+        <Member type="Event">public event AbilityEventHandler AbilityDeprecatedChanged</Member>
+        <Member type="Constructor">public Controller(IDataGetter dg)</Member>
+        <Member type="Constructor">static Controller()</Member>
+        <Member type="Method">public Void PrepareLoadedUsers(IEnumerable&lt;User&gt; users)</Member>
+        <Member type="Method">public Void PrepareSavingUsers(IEnumerable&lt;User&gt; users)</Member>
+        <Member type="Method">public ISet&lt;Ability&gt; GetUserAbilities(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetUserRolesReal(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; OnlyActive(IEnumerable&lt;Role&gt; roles)</Member>
+        <Member type="Method">public IEnumerable&lt;Ability&gt; OnlyActive(IEnumerable&lt;Ability&gt; abilities)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; OnlyActive(IEnumerable&lt;User&gt; users)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetActiveUsersWithRole(Role r)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetActiveUsersWithoutRole(Role r)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetActiveUsersWithAbility(Ability a)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetActiveUsersWithoutAbility(Ability a)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetActiveRoles()</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetActiveRolesWithAbility(Ability a)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetActiveRolesWithoutAbility(Ability a)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetActiveUserRolesReal(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetActiveUserRolesAll(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;Ability&gt; GetActiveRoleAbilities(Role r)</Member>
+        <Member type="Method">public IEnumerable&lt;Ability&gt; GetActiveAbilities()</Member>
+        <Member type="Method">public ISet&lt;Ability&gt; GetActiveUserAbilities(User u)</Member>
+        <Member type="Method">public Void Delete(IDeletable e)</Member>
+        <Member type="Method">public Void Restore(IDeletable e)</Member>
+        <Member type="Method">private Void RaiseDeprChanged(IDeletable e)</Member>
+        <Member type="Method">public Void CheckDeprecated(User u)</Member>
+        <Member type="Method">public Void CheckDeprecated(Role r)</Member>
+        <Member type="Method">private Void CheckOnRoleDeprChanged(Role r)</Member>
+        <Member type="Method">private Void ChecksOnAbilityDeprChanged(Ability a)</Member>
+        <Member type="Method">public Void AddRole(User u, Role r)</Member>
+        <Member type="Method">public Void RemoveRole(User u, Role r)</Member>
+        <Member type="Method">public Void AddRoleByAbility(User u, Role r, IEnumerable&lt;Ability&gt; selectedAbilities)</Member>
+        <Member type="Method">public Void AddRoleSavingAbilities(User u, Role r)</Member>
+        <Member type="Method">public Void RemoveRoleByAbility(User u, Role r, IEnumerable&lt;Ability&gt; selectedAbilities)</Member>
+        <Member type="Method">public Void RemoveRoleSavingAbilities(User u, Role r)</Member>
+        <Member type="Method">public Void AddAbility(User u, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbility(User u, Ability a)</Member>
+        <Member type="Method">public Void AddAbility(Role r, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbility(Role r, Ability a)</Member>
+        <Member type="Method">public Void AddAbilitySavingRoleUsersAbilities(Role r, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbilityByUser(Role r, Ability a, IEnumerable&lt;User&gt; selectedUsers)</Member>
+        <Member type="Method">public Void RemoveAbilitySavingRoleUsersAbilities(Role r, Ability a)</Member>
+        <Member type="Method">private BonusRole GetBonusRole(User u)</Member>
+        <Member type="Method">private Void MakeBonusRole(User u)</Member>
+        <Member type="Method">private Void RemoveBonusRole(User u)</Member>
+        <Member type="Method">private IEnumerable&lt;User&gt; GetUsersWithAbility(Ability a)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetRolesAbilities(User user)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetExtraAbilities(User u)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetSubtractedAbilities(User u)</Member>
+        <Member type="Method">private Void CheckExtraAbilities(User u)</Member>
+        <Member type="Method">private Void CheckSubtractedAbilities(User u)</Member>
+        <Member type="Method">protected virtual Void OnRolesChanged(User u)</Member>
+        <Member type="Method">protected virtual Void OnAbilitiesChanged(Role r)</Member>
+        <Member type="Method">protected virtual Void OnAbilitiesChanged(User u)</Member>
+        <Member type="Method">protected virtual Void OnAbilityDeprChanged(Ability a)</Member>
+        <Member type="Method">protected virtual Void OnRoleDeprChanged(Role r)</Member>
+        <Member type="Method">protected virtual Void OnUserDeprChanged(User u)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DialogViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1425" top="429" />
+        <Size width="162" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private ICommand _cancel</Member>
+        <Member type="Field">private Boolean? _dialogResult</Member>
+        <Member type="Field">private String _title</Member>
+        <Member type="Field">private ICommand _okCommand</Member>
+        <Member type="Property">public String Title { get; set; }</Member>
+        <Member type="Property">public ICommand OkCommand { get; }</Member>
+        <Member type="Property">public ICommand CancelCommand { get; }</Member>
+        <Member type="Property">public Boolean? DialogResult { get; set; }</Member>
+        <Member type="Constructor">public DialogViewModel()</Member>
+        <Member type="Method">protected virtual Void OnOk()</Member>
+        <Member type="Method">protected virtual Void OnCancel()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AbstractUraScreenViewModel&lt;T&gt;</Name>
+        <Access>Public</Access>
+        <Location left="1237" top="581" />
+        <Size width="234" height="349" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">protected Controller controller</Member>
+        <Member type="Field">protected IDataGetter dataGetter</Member>
+        <Member type="Field">private ListViewModel list1</Member>
+        <Member type="Field">private ListViewModel list2</Member>
+        <Member type="Field">protected List&lt;Object&gt; unsaved</Member>
+        <Member type="Property">public EditorViewModel&lt;T&gt; Editor { get; protected set; }</Member>
+        <Member type="Property">public T CurrentEntity { get; }</Member>
+        <Member type="Property">public AddButtonsViewModel&lt;T&gt; Buttons { get; protected set; }</Member>
+        <Member type="Property">public ListViewModel List1 { get; protected set; }</Member>
+        <Member type="Property">public ListViewModel List2 { get; protected set; }</Member>
+        <Member type="Constructor">public AbstractUraScreenViewModel()</Member>
+        <Member type="Method">protected Void AfterConstructed()</Member>
+        <Member type="Method">protected virtual Void OnOk()</Member>
+        <Member type="Method">protected virtual Void OnCancel()</Member>
+        <Member type="Method">protected T CreateVM(IDeletable entity)</Member>
+        <Member type="Method">protected abstract Void RefreshTitle()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AbilityScreenViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1087" top="841" />
+        <Size width="167" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public IEnumerable&lt;UserVM&gt; SelectedUsersVM { get; }</Member>
+        <Member type="Constructor">public AbilityScreenViewModel()</Member>
+        <Member type="Method">protected virtual Void RefreshTitle()</Member>
+        <Member type="Method">private SelectorViewModel OnAddUsers()</Member>
+        <Member type="Method">private SelectorViewModel OnAddRoles()</Member>
+        <Member type="Method">private Void Editor_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void List1_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void SetupAbilityUsers()</Member>
+        <Member type="Method">private Void SetupUserRoles()</Member>
+        <Member type="Method">private Void userVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void roleVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RoleScreenViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1087" top="777" />
+        <Size width="162" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public IEnumerable&lt;AbilityVM&gt; SelectedAbilitiesVM { get; }</Member>
+        <Member type="Constructor">public RoleScreenViewModel()</Member>
+        <Member type="Method">protected virtual Void RefreshTitle()</Member>
+        <Member type="Method">private SelectorViewModel OnAddAbilities()</Member>
+        <Member type="Method">private SelectorViewModel OnAddUsers()</Member>
+        <Member type="Method">private Void Editor_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void List1_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void SetupRoleAbilities()</Member>
+        <Member type="Method">private Void SetupAbilityUsers()</Member>
+        <Member type="Method">private Void aVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void userVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AddButtonsViewModel&lt;T&gt;</Name>
+        <Access>Public</Access>
+        <Location left="1502" top="624" />
+        <Size width="192" height="298" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private T _entity</Member>
+        <Member type="Field">private ICommand _add1</Member>
+        <Member type="Field">private ICommand _add2</Member>
+        <Member type="Field">private String _add1title</Member>
+        <Member type="Field">private String _add2title</Member>
+        <Member type="Field">private Func&lt;SelectorViewModel&gt; add1</Member>
+        <Member type="Field">private Func&lt;SelectorViewModel&gt; add2</Member>
+        <Member type="Property">public T Entity { get; set; }</Member>
+        <Member type="Property">public ICommand Add1Command { get; }</Member>
+        <Member type="Property">public String Add1Title { get; set; }</Member>
+        <Member type="Property">public ICommand Add2Command { get; }</Member>
+        <Member type="Property">public String Add2Title { get; set; }</Member>
+        <Member type="Constructor">public AddButtonsViewModel(Func&lt;SelectorViewModel&gt; add1, String title1, Func&lt;SelectorViewModel&gt; add2, String title2)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SelectorViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1644" top="704" />
+        <Size width="194" height="168" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private Action&lt;IEnumerable&lt;EntityBaseVM&gt;&gt; onOk</Member>
+        <Member type="Property">public ObservableCollection&lt;EntityBaseVM&gt; Items { get; private set; }</Member>
+        <Member type="Property">public IEnumerable&lt;EntityBaseVM&gt; SelectedItems { get; }</Member>
+        <Member type="Constructor">public SelectorViewModel(IEnumerable&lt;EntityBaseVM&gt; entities, Action&lt;IEnumerable&lt;EntityBaseVM&gt;&gt; ok_handler)</Member>
+        <Member type="Method">protected virtual Void OnOk()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>EntityBaseVM</Name>
+        <Access>Public</Access>
+        <Location left="1471" top="836" />
+        <Size width="162" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">protected Boolean deprecated</Member>
+        <Member type="Field">private Boolean? _isChecked</Member>
+        <Member type="Field">private Boolean _isSelected</Member>
+        <Member type="Property">public Boolean? IsChecked { get; set; }</Member>
+        <Member type="Property">public Boolean IsSelected { get; set; }</Member>
+        <Member type="Property">public abstract String Represent { get; }</Member>
+        <Member type="Property">public abstract Boolean Deprecated { get; set; }</Member>
+        <Member type="Event">public event BoolEventHandler DeprChanged</Member>
+        <Member type="Constructor">protected EntityBaseVM()</Member>
+        <Member type="Method">public Void OnDeprecatedChangedByCode()</Member>
+        <Member type="Method">protected virtual Void OnDeprChanged(Boolean value)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>EditorViewModel&lt;T&gt;</Name>
+        <Access>Public</Access>
+        <Location left="1502" top="535" />
+        <Size width="192" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private String _prompt</Member>
+        <Member type="Field">private T _selected</Member>
+        <Member type="Field">private ICommand _new</Member>
+        <Member type="Field">private ICommand _delete</Member>
+        <Member type="Field">private Func&lt;T&gt; OnNewEntity</Member>
+        <Member type="Property">public ObservableCollection&lt;T&gt; AllEntities { get; private set; }</Member>
+        <Member type="Property">public T SelectedEntity { get; set; }</Member>
+        <Member type="Property">public String Prompt { get; set; }</Member>
+        <Member type="Property">public ICommand NewEntityCommand { get; }</Member>
+        <Member type="Property">public ICommand DeleteEntityCommand { get; }</Member>
+        <Member type="Constructor">public EditorViewModel(IEnumerable&lt;T&gt; all, String prompt, Func&lt;T&gt; onNewEntity)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ListViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1356" top="727" />
+        <Size width="162" height="247" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private EntityBaseVM _selected</Member>
+        <Member type="Field">private String _title</Member>
+        <Member type="Field">private Boolean _onlyDelete</Member>
+        <Member type="Property">public ReadOnlyObservableCollection&lt;EntityBaseVM&gt; Items { get; private set; }</Member>
+        <Member type="Property">public EntityBaseVM SelectedItem { get; set; }</Member>
+        <Member type="Property">public IEnumerable&lt;EntityBaseVM&gt; SelectedItems { get; }</Member>
+        <Member type="Property">public String Title { get; set; }</Member>
+        <Member type="Property">public Boolean OnlyDelete { get; set; }</Member>
+        <Member type="Constructor">public ListViewModel(IEnumerable&lt;EntityBaseVM&gt; items)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ShellWindowViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1103" top="487" />
+        <Size width="183" height="213" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">private ViewModelBase _currentScreen</Member>
+        <Member type="Field">private ICommand _setScreen</Member>
+        <Member type="Property">public ViewModelBase CurrentScreen { get; set; }</Member>
+        <Member type="Property">public ICommand SetScreenCommand { get; }</Member>
+        <Member type="Constructor">public ShellWindowViewModel()</Member>
+        <Member type="Method">internal Void OpenUsers()</Member>
+        <Member type="Method">internal Void OpenRoles()</Member>
+        <Member type="Method">internal Void OpenAbilities()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserScreenViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1087" top="908" />
+        <Size width="162" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public IEnumerable&lt;RoleVM&gt; SelectedRolesVM { get; }</Member>
+        <Member type="Constructor">public UserScreenViewModel()</Member>
+        <Member type="Method">protected virtual Void RefreshTitle()</Member>
+        <Member type="Method">private SelectorViewModel OnAddRoles()</Member>
+        <Member type="Method">private SelectorViewModel OnAddAbilities()</Member>
+        <Member type="Method">private Void Editor_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void List1_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void SetupUserRoles()</Member>
+        <Member type="Method">private Void SetupRoleAbilities()</Member>
+        <Member type="Method">private Void roleVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Member type="Method">private Void abilityVM_PropertyChanged(Object sender, PropertyChangedEventArgs e)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RoleVM</Name>
+        <Access>Public</Access>
+        <Location left="1298" top="957" />
+        <Size width="162" height="216" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">internal readonly Role role</Member>
+        <Member type="Property">public Int32 Id { get; }</Member>
+        <Member type="Property">public String Description { get; set; }</Member>
+        <Member type="Property">public override Boolean Deprecated { get; set; }</Member>
+        <Member type="Property">public override String Represent { get; }</Member>
+        <Member type="Constructor">public RoleVM(Role role)</Member>
+        <Member type="Method">public Boolean Filter(String query)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AbilityVM</Name>
+        <Access>Public</Access>
+        <Location left="1644" top="957" />
+        <Size width="162" height="216" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">internal readonly Ability ability</Member>
+        <Member type="Property">public Int32 Id { get; }</Member>
+        <Member type="Property">public String Description { get; set; }</Member>
+        <Member type="Property">public override Boolean Deprecated { get; set; }</Member>
+        <Member type="Property">public override String Represent { get; }</Member>
+        <Member type="Constructor">public AbilityVM(Ability ability)</Member>
+        <Member type="Method">public Boolean Filter(String query)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserVM</Name>
+        <Access>Public</Access>
+        <Location left="1471" top="957" />
+        <Size width="162" height="216" />
+        <Collapsed>True</Collapsed>
+        <Member type="Field">internal readonly User user</Member>
+        <Member type="Property">public Int32 Id { get; }</Member>
+        <Member type="Property">public String Login { get; set; }</Member>
+        <Member type="Property">public override Boolean Deprecated { get; set; }</Member>
+        <Member type="Property">public override String Represent { get; }</Member>
+        <Member type="Constructor">public UserVM(User user)</Member>
+        <Member type="Method">public Boolean Filter(String query)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DataGetter</Name>
+        <Access>Public</Access>
+        <Location left="1087" top="704" />
+        <Size width="162" height="77" />
+        <Collapsed>True</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FilterViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1680" top="799" />
+        <Size width="162" height="77" />
+        <Collapsed>True</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="2" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1321</X>
+          <Y>532</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1512</X>
+          <Y>503</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1745</X>
+          <Y>535</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1512</X>
+          <Y>499</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="12" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="13" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="14" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="2" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1212</X>
+          <Y>591</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>controller</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="9" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1396</X>
+          <Y>797</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>Items</StartRole>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1451</X>
+          <Y>556</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>Editor</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1452</X>
+          <Y>651</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>Buttons</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1274</X>
+          <Y>794</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1291</X>
+          <Y>651</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="11" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1274</X>
+          <Y>935</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1291</X>
+          <Y>651</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="6" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1669</X>
+          <Y>774</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1658</X>
+          <Y>859</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>Items</StartRole>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1279</X>
+          <Y>864</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1291</X>
+          <Y>651</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="5" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1719</X>
+          <Y>647</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1719</X>
+          <Y>679</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="2" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1388</X>
+          <Y>651</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>List1, List2</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="10" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1269</X>
+          <Y>556</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>CurrentScreen</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Dependency" first="0" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1119</X>
+          <Y>679</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="2" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1252</X>
+          <Y>651</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1230</X>
+          <Y>679</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="6" second="16">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>ura.exe</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Controller</Name>
+        <Access>Public</Access>
+        <Location left="33" top="28" />
+        <Size width="485" height="978" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IDataGetter dataGetter</Member>
+        <Member type="Field">private static Dictionary&lt;User, Boolean&gt; makingBonus</Member>
+        <Member type="Property">public Boolean IsDirty { get; private set; }</Member>
+        <Member type="Event">public event UserEventHandler UserRolesChanged</Member>
+        <Member type="Event">public event UserEventHandler UserDeprecatedChanged</Member>
+        <Member type="Event">public event RoleEventHandler RoleAbilitiesChanged</Member>
+        <Member type="Event">public event RoleEventHandler RoleDeprecatedChanged</Member>
+        <Member type="Event">public event UserEventHandler UserAbilitiesChanged</Member>
+        <Member type="Event">public event AbilityEventHandler AbilityDeprecatedChanged</Member>
+        <Member type="Event">public event EventHandler ModelChanged</Member>
+        <Member type="Constructor">public Controller(IDataGetter dg)</Member>
+        <Member type="Method">public Void PrepareLoadedUsers(IEnumerable&lt;User&gt; users)</Member>
+        <Member type="Method">public Void PrepareSavingUsers(IEnumerable&lt;User&gt; users)</Member>
+        <Member type="Method">public ISet&lt;Ability&gt; GetUserAbilities(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;Role&gt; GetUserRolesReal(User u)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetUsersWithAbility(Ability a)</Member>
+        <Member type="Method">public IEnumerable&lt;User&gt; GetUsersWithoutAbility(Ability a)</Member>
+        <Member type="Method">public ISet&lt;Ability&gt; GetActiveUserAbilities(User u)</Member>
+        <Member type="Method">public Void Delete(IDeletable e)</Member>
+        <Member type="Method">public Void Restore(IDeletable e)</Member>
+        <Member type="Method">public Void CheckDeprecated(User u)</Member>
+        <Member type="Method">public Void CheckDeprecated(Role r)</Member>
+        <Member type="Method">private Void CheckOnRoleDeprChanged(Role r)</Member>
+        <Member type="Method">private Void ChecksOnAbilityDeprChanged(Ability a)</Member>
+        <Member type="Method">private Void RaiseDeprChanged(IDeletable e)</Member>
+        <Member type="Method">public Void AddRole(User u, Role r)</Member>
+        <Member type="Method">public Void RemoveRole(User u, Role r)</Member>
+        <Member type="Method">public Void AddRoleByAbility(User u, Role r, IEnumerable&lt;Ability&gt; selectedAbilities)</Member>
+        <Member type="Method">public Void AddRoleSavingAbilities(User u, Role r)</Member>
+        <Member type="Method">public Void RemoveRoleByAbility(User u, Role r, IEnumerable&lt;Ability&gt; selectedAbilities)</Member>
+        <Member type="Method">public Void RemoveRoleSavingAbilities(User u, Role r)</Member>
+        <Member type="Method">public Void AddAbility(User u, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbility(User u, Ability a)</Member>
+        <Member type="Method">public Void AddAbility(Role r, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbility(Role r, Ability a)</Member>
+        <Member type="Method">public Void AddAbilitySavingRoleUsersAbilities(Role r, Ability a)</Member>
+        <Member type="Method">public Void RemoveAbilityByUser(Role r, Ability a, IEnumerable&lt;User&gt; selectedUsers)</Member>
+        <Member type="Method">public Void RemoveAbilitySavingRoleUsersAbilities(Role r, Ability a)</Member>
+        <Member type="Method">private BonusRole GetBonusRole(User u)</Member>
+        <Member type="Method">private Void MakeBonusRole(User u)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetRolesAbilities(User user)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetExtraAbilities(User u)</Member>
+        <Member type="Method">private ISet&lt;Ability&gt; GetSubtractedAbilities(User u)</Member>
+        <Member type="Method">private Void CheckExtraAbilities(User u)</Member>
+        <Member type="Method">private Void CheckSubtractedAbilities(User u)</Member>
+        <Member type="Method">protected virtual Void OnRolesChanged(User u)</Member>
+        <Member type="Method">protected virtual Void OnAbilitiesChanged(Role r)</Member>
+        <Member type="Method">protected virtual Void OnAbilitiesChanged(User u)</Member>
+        <Member type="Method">protected virtual Void OnAbilityDeprChanged(Ability a)</Member>
+        <Member type="Method">protected virtual Void OnRoleDeprChanged(Role r)</Member>
+        <Member type="Method">protected virtual Void OnUserDeprChanged(User u)</Member>
+        <Member type="Method">protected virtual Void OnModelChanged()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>

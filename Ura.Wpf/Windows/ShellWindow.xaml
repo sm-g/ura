@@ -1,0 +1,26 @@
+﻿<Window x:Class="Ura.Windows.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window" Height="300" Width="600" Loaded="Window_Loaded">
+    <!--TestWindowViewModel -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+        <StackPanel.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource commandButton}" />
+        </StackPanel.Resources>
+            <Button Content="Пользователи" Command="{Binding SetScreenCommand}" CommandParameter="user" />
+            <Button Content="Роли"  Command="{Binding SetScreenCommand}" CommandParameter="role" />
+            <Button Content="Возможности"  Command="{Binding SetScreenCommand}" CommandParameter="ability" />
+        </StackPanel>
+        
+        <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="Log" 
+                 Grid.Row="1" VerticalAlignment="Stretch" 
+                 AcceptsReturn="True"
+                 TextChanged="Log_TextChanged"
+                 Height="Auto" Margin="0,10,0,0" />
+    </Grid>
+</Window>
